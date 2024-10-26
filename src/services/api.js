@@ -1,4 +1,3 @@
-// client/src/services/api.js
 import axios from 'axios';
 
 const API_URL = 'https://taskmagers.vercel.app/api';
