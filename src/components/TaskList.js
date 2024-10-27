@@ -12,7 +12,11 @@ const TaskList = () => {
   }, []);
 
   const fetchTasks = async () => {
-    const response = await api.get('/tasks');
+    const response = await axios.get('https://task-managemenr-server.onrender.com/api/tasks', {
+      headers:{
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     setTasks(response.data.tasks || response.data);
   };
 
