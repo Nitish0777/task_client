@@ -81,7 +81,7 @@ const TaskList = () => {
         {tasks?.map((task) => (
           <li key={task._id} style={{ ...taskItemStyle, backgroundColor: task.status === 'completed' ? '#e6ffe6' : '#fff' }}>
             <div style={taskContentStyle}>
-              <span style={titleStyle}>{task.title}</span>
+              <div style={titleStyle}>{task.title}</div>
               {editTaskId === task._id ? (
                 <>
                   <input
@@ -98,11 +98,11 @@ const TaskList = () => {
                   </button>
                 </>
               ) : (
-                <span style={descriptionStyle}>{task.description}</span>
+                <div style={descriptionStyle}>{task.description}</div>
               )}
-              <span style={createdAtStyle}>
+              <div style={createdAtStyle}>
                 Created at: {new Date(task.createdAt).toLocaleString()}
-              </span>
+              </div>
             </div>
             <div style={buttonContainerStyle}>
               <button
