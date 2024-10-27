@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import api from '../services/api';
+import axios from 'axios';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -16,13 +17,18 @@ const TaskList = () => {
   };
 
   const deleteTask = async (id) => {
-    await api.delete(`/tasks/${id}`);
+    // await api.delete(`/tasks/${id}`);
+    const res = await axios.delete(`https://task-managemenr-server.onrender.com/api/tasks/${id}`);
+    console.log(res);
+
     fetchTasks();
   };
 
   const toggleComplete = async (id) => {
     const task = tasks.find((task) => task._id === id);
-    await api.put(`/tasks/${id}`, { ...task, status: task.status === 'completed' ? 'pending' : 'completed' });
+    // await api.put(`/tasks/${id}`, { ...task, status: task.status === 'completed' ? 'pending' : 'completed' });
+    const res = await axios.put(`https://task-managemenr-server.onrender.com/api/tasks/${id}`, { ...task, status: task.status === 'completed' ? 'pending' : 'completed' });
+    console.log(res);
     fetchTasks();
   };
 

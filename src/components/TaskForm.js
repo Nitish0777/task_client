@@ -2,15 +2,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import api from '../services/api';
+import axios from 'axios';
 
 const TaskForm = ({ onTaskAdded }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const navigate = useNavigate(); // Create navigate function
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await api.post('/tasks', { title, description });
+    // await api.post('/tasks', { title, description });
+    const data = await axios.post('https://task-managemenr-server.onrender.com/api/tasks', { title, description });
+    console.log(data);
     setTitle('');
     setDescription('');
     onTaskAdded();
