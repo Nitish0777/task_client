@@ -22,7 +22,11 @@ const TaskList = () => {
 
   const deleteTask = async (id) => {
     // await api.delete(`/tasks/${id}`);
-    const res = await axios.delete(`https://task-managemenr-server.onrender.com/api/tasks/${id}`);
+    const res = await axios.delete(`https://task-managemenr-server.onrender.com/api/tasks/${id}`,{
+      headers:{
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     console.log(res);
 
     fetchTasks();
@@ -31,7 +35,11 @@ const TaskList = () => {
   const toggleComplete = async (id) => {
     const task = tasks.find((task) => task._id === id);
     // await api.put(`/tasks/${id}`, { ...task, status: task.status === 'completed' ? 'pending' : 'completed' });
-    const res = await axios.put(`https://task-managemenr-server.onrender.com/api/tasks/${id}`, { ...task, status: task.status === 'completed' ? 'pending' : 'completed' });
+    const res = await axios.put(`https://task-managemenr-server.onrender.com/api/tasks/${id}`, { ...task, status: task.status === 'completed' ? 'pending' : 'completed' },{
+      headers:{
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     console.log(res);
     fetchTasks();
   };
