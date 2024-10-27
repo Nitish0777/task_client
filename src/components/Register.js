@@ -13,9 +13,10 @@ const Register = () => {
     e.preventDefault();
     const data = await axios.post('https://task-managemenr-server.onrender.com/api/auth/register', { username, password });
     console.log(data);
-    if (data.status === 200){
+    if (data.status === 201){
         navigate('/login');  
     }
+    // navigator.vibrate(200);
     alert(data.data.message);
   };
 

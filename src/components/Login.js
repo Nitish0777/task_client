@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { login } from '../services/authService';
 import { useNavigate } from 'react-router-dom'; 
+import axios from 'axios';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -9,7 +10,13 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    await login(username, password);
+    // await login(username, password);
+    const data = await axios.post('https://task-managemenr-server.onrender.com/api/auth/login', { username,password });
+    console.log(data);
+    if (data.status === 200){
+        localStorage.setItem('token', data.data.token);
+        navigate('/tasks');
+    }
     window.location.reload();
   };
 
