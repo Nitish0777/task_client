@@ -11,11 +11,18 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     // await login(username, password);
-    const data = await axios.post('https://task-managemenr-server.onrender.com/api/auth/login', { username,password });
+    const data = await axios.post('https://task-managemenr-server.onrender.com/api/auth/login', {
+      username,
+      password,
+    },{
+      headers:{
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     console.log(data);
     if (data.status === 200){
         localStorage.setItem('token', data.data.token);
-        navigate('/tasks');
+        navigate('/');
     }
     window.location.reload();
   };
