@@ -13,7 +13,11 @@ const TaskForm = ({ onTaskAdded }) => {
     e.preventDefault();
     // await api.post('/tasks', { title, description });
     console.log(title, description);
-    const data = await axios.post('https://task-managemenr-server.onrender.com/api/tasks', { title, description });
+    const data = await axios.post('https://task-managemenr-server.onrender.com/api/tasks', { title, description },{
+      headers:{
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     console.log(data);
     setTitle('');
     setDescription('');
