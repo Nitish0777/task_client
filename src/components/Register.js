@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { register } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -10,8 +11,12 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    await register(username, password);
-    navigate('/login');  // Navigate to the login page after registration
+    const data = await axios.post('https://task-managemenr-server.onrender.com/api/auth/register', { username, password });
+    console.log(data);
+    if (data.status === 200){
+        navigate('/login');  
+    }
+    alert(data.data.message);
   };
 
   return (
