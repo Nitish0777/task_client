@@ -12,12 +12,15 @@ const TaskForm = ({ onTaskAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // await api.post('/tasks', { title, description });
+    console.log(title, description);
     const data = await axios.post('https://task-managemenr-server.onrender.com/api/tasks', { title, description });
     console.log(data);
     setTitle('');
     setDescription('');
     onTaskAdded();
-    alert('Task added successfully!'); // Alert added here
+    if (data.status === 201){
+        navigate('/tasks');
+    }
   };
 
   const handleSeeTasks = () => {
